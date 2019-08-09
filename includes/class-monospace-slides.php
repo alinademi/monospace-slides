@@ -118,6 +118,11 @@ class Monospace_Slides {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-monospace-slides-admin.php';
 
 		/**
+		 * The class responsible for the functionality of the custom post type.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-monospace-slides-cpt.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
