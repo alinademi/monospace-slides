@@ -77,7 +77,10 @@ class Monospace_Slides {
 
 		$this->load_dependencies();
 		$this->set_locale();
+
 		$this->define_admin_hooks();
+		$this->define_cpt_hooks();
+
 		$this->define_public_hooks();
 
 	}
@@ -162,6 +165,24 @@ class Monospace_Slides {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to registering and managing a custom post type
+	 * as well as customizing the admin columns.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 */
+	private function define_cpt_hooks() {
+
+		$plugin_cpt = new Monospace_Slides_CPT();
+
+		$this->loader->add_action( 'init', $plugin_cpt, 'new_cpt_slide' );
+
+		$this->loader->add_filter( 'manage_edit-mnsp_slide_columns', $plugin_cpt, 'add_slide_columns' );
+		$this->loader->add_filter( 'manage_mnsp_slide_posts_custom_column', $plugin_cpt, 'add_slide_columns_content', 10, 2 );
 
 	}
 
