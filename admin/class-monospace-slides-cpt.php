@@ -90,4 +90,35 @@ class Monospace_Slides_CPT {
 
 	}
 
+	/**
+	 * Creates a new admin column on the custom post type listing screen.
+	 *
+	 * @since 1.0.0
+	 * @param string $columns    The name of the column to add.
+	 * @access public
+	 */
+	public function add_slide_columns( $columns ) {
+
+		$columns['image'] = __( 'Image', 'monospace-slides' );
+
+		return $columns;
+
+	}
+
+	/**
+	 * Displays the featured image of a post in an admin column called 'image'.
+	 *
+	 * @since 1.0.0
+	 * @param string $column     The name of the column.
+	 * @param int    $post_id    The id of the post.
+	 * @access public
+	 */
+	public function add_slide_columns_content( $column, $post_id ) {
+
+		if ( 'image' === $column ) {
+			echo get_the_post_thumbnail( $post_id, array( 80, 80 ) );
+		}
+
+	}
+
 }
