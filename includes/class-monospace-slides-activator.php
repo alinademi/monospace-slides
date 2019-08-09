@@ -28,6 +28,15 @@ class Monospace_Slides_Activator {
 	 */
 	public static function activate() {
 
+		/**
+		 * The class responsible for defining the behavior of the custom post type.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-monospace-slides-cpt.php';
+
+		Monospace_Slides_CPT::new_cpt_slide();
+
+		flush_rewrite_rules();
+
 	}
 
 }
