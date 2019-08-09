@@ -126,6 +126,11 @@ class Monospace_Slides {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-monospace-slides-cpt.php';
 
 		/**
+		 * The class responsible for the functionality of the custom taxonomy.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-monospace-slides-tax.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
