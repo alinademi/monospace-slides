@@ -33,7 +33,13 @@ class Monospace_Slides_Activator {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-monospace-slides-cpt.php';
 
+		/**
+		 * The class responsible for the functionality of the custom taxonomy.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-monospace-slides-tax.php';
+
 		Monospace_Slides_CPT::new_cpt_slide();
+		Monospace_Slides_TAX::new_tax_slider();
 
 		flush_rewrite_rules();
 
