@@ -80,6 +80,7 @@ class Monospace_Slides {
 
 		$this->define_admin_hooks();
 		$this->define_cpt_hooks();
+		$this->define_tax_hooks();
 
 		$this->define_public_hooks();
 
@@ -188,6 +189,20 @@ class Monospace_Slides {
 
 		$this->loader->add_filter( 'manage_edit-mnsp_slide_columns', $plugin_cpt, 'add_slide_columns' );
 		$this->loader->add_filter( 'manage_mnsp_slide_posts_custom_column', $plugin_cpt, 'add_slide_columns_content', 10, 2 );
+
+	}
+
+	/**
+	 * Register all of the hooks related to registering a custom taxonomy.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 */
+	private function define_tax_hooks() {
+
+		$plugin_tax = new Monospace_Slides_TAX();
+
+		$this->loader->add_action( 'init', $plugin_tax, 'new_tax_slider' );
 
 	}
 
