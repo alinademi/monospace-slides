@@ -91,7 +91,7 @@ class Monospace_Slides_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/monospace-slides-admin.js', array(), $this->version, true );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/monospace-slides-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, true );
 
 	}
 
