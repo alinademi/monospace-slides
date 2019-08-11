@@ -69,6 +69,9 @@ class Monospace_Slides_CPT_Meta {
 	 */
 	public function enqueue_scripts() {
 
+		// The Javascript for the Media Library.
+		wp_enqueue_script( 'wp-media', plugin_dir_url( __FILE__ ) . 'js/wp-media.js', array( 'jquery' ), $this->version, true );
+
 	}
 
 	/**
