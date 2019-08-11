@@ -223,6 +223,57 @@ class Monospace_Slides {
 	}
 
 	/**
+	 * Defines the allowed HTML tags and attributes.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function expanded_alowed_tags() {
+		$my_allowed = wp_kses_allowed_html( 'post' );
+
+		$my_allowed['input'] = array(
+			'class'       => array(),
+			'id'          => array(),
+			'name'        => array(),
+			'value'       => array(),
+			'type'        => array(),
+			'style'       => array(),
+			'min'         => array(),
+			'max'         => array(),
+			'step'        => array(),
+			'checked'     => array(),
+			'placeholder' => array(),
+		);
+
+		$my_allowed['textarea'] = array(
+			'class'       => array(),
+			'id'          => array(),
+			'name'        => array(),
+			'style'       => array(),
+			'rows'        => array(),
+			'cols'        => array(),
+			'placeholder' => array(),
+		);
+
+		$my_allowed['select'] = array(
+			'class' => array(),
+			'id'    => array(),
+			'name'  => array(),
+			'type'  => array(),
+		);
+
+		$my_allowed['option'] = array(
+			'selected' => array(),
+			'value'    => array(),
+		);
+
+		$my_allowed['style'] = array(
+			'type' => array(),
+		);
+
+		return $my_allowed;
+	}
+
+	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
 	 * @since 1.0.0
