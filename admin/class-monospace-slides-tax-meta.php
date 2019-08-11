@@ -283,4 +283,45 @@ class Monospace_Slides_TAX_Meta {
 
 	}
 
+	/**
+	 * Saves the information from the meta data fields into the database.
+	 *
+	 * @since 1.0.0
+	 * @param int $term_id    The id of the term.
+	 */
+	public function save_fields( $term_id ) {
+
+		if ( ! isset( $_POST['monospace_slides_admin_termmeta_nonce'] ) ) {
+			return $post_id;
+		}
+
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['monospace_slides_admin_termmeta_nonce'] ) ), 'monospace_slides_admin_termmeta_data' ) ) {
+			return $post_id;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id;
+		}
+
+		foreach ( $this->meta_fields() as $meta_field ) {
+			if ( isset( $_POST[ $meta_field['id'] ] ) ) {
+				switch ( $meta_field['type'] ) {
+					case 'text':
+						$meta_value = sanitize_text_field( wp_unslash( $_POST[ $meta_field['id'] ] ) );
+						break;
+					case 'textarea':
+						$meta_value = sanitize_textarea_field( wp_unslash( $_POST[ $meta_field['id'] ] ) );
+						break;
+					default:
+						$meta_value = sanitize_meta( $meta_field['id'], wp_unslash( $_POST[ $meta_field['id'] ] ), 'taxonomy' );
+				}
+
+				update_term_meta( $term_id, $meta_field['id'], $meta_value );
+			} else {
+				delete_term_meta( $term_id, $meta_field['id'] );
+			}
+		}
+
+	}
+
 }
