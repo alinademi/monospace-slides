@@ -71,4 +71,38 @@ class Monospace_Slides_CPT_Meta {
 
 	}
 
+	/**
+	 * Add the meta box on the screens defined in the 'screen' propery.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_meta_boxes() {
+
+		foreach ( $this->screen as $single_screen ) {
+			add_meta_box(
+				'monospace_slides_admin_metabox',
+				esc_html__( 'Slide Options', 'monospace-slides' ),
+				array( $this, 'meta_box_callback' ),
+				$single_screen,
+				'normal',
+				'high'
+			);
+		}
+
+	}
+
+	/**
+	 * Generate the fields of the custom meta box.
+	 *
+	 * @since 1.0.0
+	 * @param object $post    The post object.
+	 */
+	public function meta_box_callback( $post ) {
+
+		wp_nonce_field( 'monospace_slides_admin_metabox_data', 'monospace_slides_admin_metabox_nonce' );
+		esc_html_e( 'Set the options for the current slide.', 'monospace-slides' );
+		$this->field_generator( $post );
+
+	}
+
 }
