@@ -358,4 +358,45 @@ class Monospace_Slides_CPT_Meta {
 
 	}
 
+	/**
+	 * Saves the information from the meta box fields into the database.
+	 *
+	 * @since 1.0.0
+	 * @param int $post_id    The id of the post.
+	 */
+	public function save_fields( $post_id ) {
+
+		if ( ! isset( $_POST['monospace_slides_admin_metabox_nonce'] ) ) {
+			return $post_id;
+		}
+
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['monospace_slides_admin_metabox_nonce'] ) ), 'monospace_slides_admin_metabox_data' ) ) {
+			return $post_id;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id;
+		}
+
+		foreach ( $this->meta_fields() as $meta_field ) {
+			if ( isset( $_POST[ $meta_field['id'] ] ) ) {
+				switch ( $meta_field['type'] ) {
+					case 'text':
+						$meta_value = sanitize_text_field( wp_unslash( $_POST[ $meta_field['id'] ] ) );
+						break;
+					case 'textarea':
+						$meta_value = sanitize_textarea_field( wp_unslash( $_POST[ $meta_field['id'] ] ) );
+						break;
+					default:
+						$meta_value = sanitize_meta( $meta_field['id'], wp_unslash( $_POST[ $meta_field['id'] ] ), 'post' );
+				}
+
+				update_post_meta( $post_id, $meta_field['id'], $meta_value );
+			} elseif ( 'checkbox' === $meta_field['type'] ) {
+				delete_post_meta( $post_id, $meta_field['id'] );
+			}
+		}
+
+	}
+
 }
