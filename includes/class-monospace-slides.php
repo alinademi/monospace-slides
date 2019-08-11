@@ -81,6 +81,7 @@ class Monospace_Slides {
 		$this->define_admin_hooks();
 		$this->define_cpt_hooks();
 		$this->define_tax_hooks();
+		$this->define_metabox_hooks();
 
 		$this->define_public_hooks();
 
@@ -208,6 +209,25 @@ class Monospace_Slides {
 		$plugin_tax = new Monospace_Slides_TAX();
 
 		$this->loader->add_action( 'init', $plugin_tax, 'new_tax_slider' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to metaboxes
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 */
+	private function define_metabox_hooks() {
+
+		$plugin_metaboxes = new Monospace_Slides_CPT_Meta( $this->get_version() );
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_metaboxes, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_metaboxes, 'enqueue_scripts' );
+
+		$this->loader->add_action( 'add_meta_boxes', $plugin_metaboxes, 'add_meta_boxes' );
+
+		$this->loader->add_action( 'save_post', $plugin_metaboxes, 'save_fields' );
 
 	}
 
