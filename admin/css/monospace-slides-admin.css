@@ -3,3 +3,10 @@
  * included in this file.
  */
  
+.monospace-slides-admin-metabox-form #mnsp-slide-image {
+	width: 50%;
+}
+
+.monospace-slides-admin-metabox-form #mnsp-slide-image_button {
+	width: 20%;
+}
