@@ -82,6 +82,7 @@ class Monospace_Slides {
 		$this->define_cpt_hooks();
 		$this->define_tax_hooks();
 		$this->define_metabox_hooks();
+		$this->define_term_meta_hooks();
 
 		$this->define_public_hooks();
 
@@ -233,6 +234,25 @@ class Monospace_Slides {
 		$this->loader->add_action( 'add_meta_boxes', $plugin_metaboxes, 'add_meta_boxes' );
 
 		$this->loader->add_action( 'save_post', $plugin_metaboxes, 'save_fields' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to taxonomy term meta
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 */
+	private function define_term_meta_hooks() {
+
+		$plugin_term_meta = new Monospace_Slides_TAX_Meta();
+
+		if ( is_admin() ) {
+			$this->loader->add_action( 'mnsp_slider_add_form_fields', $plugin_term_meta, 'create_fields', 10, 2 );
+			$this->loader->add_action( 'mnsp_slider_edit_form_fields', $plugin_term_meta, 'edit_fields', 10, 2 );
+			$this->loader->add_action( 'created_mnsp_slider', $plugin_term_meta, 'save_fields', 10, 1 );
+			$this->loader->add_action( 'edited_mnsp_slider', $plugin_term_meta, 'save_fields', 10, 1 );
+		}
 
 	}
 
