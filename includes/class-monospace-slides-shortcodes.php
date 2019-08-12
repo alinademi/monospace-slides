@@ -324,4 +324,37 @@ class Monospace_Slides_Shortcodes {
 
 	}
 
+	/**
+	 * Creates a new admin column on the custom taxonomy listing screen that will display the slider shortcode.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param array $columns    Screen columns.
+	 */
+	public function add_slider_columns( $columns ) {
+
+		$columns['shortcode'] = __( 'Shortcode', 'monospace-slides' );
+
+		return $columns;
+
+	}
+
+	/**
+	 * Displays the slider shortcode in an admin column called 'shortcode'.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param string $content        The content of the shortcode.
+	 * @param string $column_name    Shortcode column name identifier.
+	 * @param int    $term_id        The id of the taxonomy term id.
+	 */
+	public function add_slider_columns_content( $content, $column_name, $term_id ) {
+
+		if ( 'shortcode' === $column_name ) {
+			$content = '[mnsp_slider id="' . $term_id . '"]';
+		}
+
+		return $content;
+	}
+
 }
