@@ -273,9 +273,13 @@ class Monospace_Slides {
 		$plugin_shortcodes = new Monospace_Slides_Shortcodes();
 
 		$this->loader->add_action( 'init', $plugin_shortcodes, 'register_slide_shortcode' );
+		$this->loader->add_action( 'init', $plugin_shortcodes, 'register_slider_shortcode' );
 
 		$this->loader->add_filter( 'manage_edit-mnsp_slide_columns', $plugin_shortcodes, 'add_slide_columns' );
 		$this->loader->add_filter( 'manage_mnsp_slide_posts_custom_column', $plugin_shortcodes, 'add_slide_columns_content', 10, 2 );
+
+		$this->loader->add_filter( 'manage_edit-mnsp_slider_columns', $plugin_shortcodes, 'add_slider_columns' );
+		$this->loader->add_filter( 'manage_mnsp_slider_custom_column', $plugin_shortcodes, 'add_slider_columns_content', 10, 3 );
 
 	}
 
