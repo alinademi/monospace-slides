@@ -70,6 +70,12 @@ class Monospace_Slides_Public {
 		 * class.
 		 */
 
+		global $post;
+
+		if ( has_shortcode( $post->post_content, 'mnsp_slider' ) ) {
+			wp_enqueue_style( 'glide', plugin_dir_url( __FILE__ ) . 'css/glide.core.min.css', array(), $this->version, 'all' );
+		}
+
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/monospace-slides-public.css', array(), $this->version, 'all' );
 
 	}
@@ -90,6 +96,12 @@ class Monospace_Slides_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+
+		global $post;
+
+		if ( has_shortcode( $post->post_content, 'mnsp_slider' ) ) {
+			wp_enqueue_script( 'glide', plugin_dir_url( __FILE__ ) . 'js/glide.min.js', array(), $this->version, true );
+		}
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/monospace-slides-public.js', array(), $this->version, true );
 
