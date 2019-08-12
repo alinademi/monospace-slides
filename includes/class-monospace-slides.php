@@ -83,6 +83,7 @@ class Monospace_Slides {
 		$this->define_tax_hooks();
 		$this->define_metabox_hooks();
 		$this->define_term_meta_hooks();
+		$this->define_shortcodes_hooks();
 
 		$this->define_public_hooks();
 
@@ -258,6 +259,23 @@ class Monospace_Slides {
 			$this->loader->add_action( 'created_mnsp_slider', $plugin_term_meta, 'save_fields', 10, 1 );
 			$this->loader->add_action( 'edited_mnsp_slider', $plugin_term_meta, 'save_fields', 10, 1 );
 		}
+
+	}
+
+	/**
+	 * Register all the hooks needed for shortcodes functionality
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public function define_shortcodes_hooks() {
+
+		$plugin_shortcodes = new Monospace_Slides_Shortcodes();
+
+		$this->loader->add_action( 'init', $plugin_shortcodes, 'register_slide_shortcode' );
+
+		$this->loader->add_filter( 'manage_edit-mnsp_slide_columns', $plugin_shortcodes, 'add_slide_columns' );
+		$this->loader->add_filter( 'manage_mnsp_slide_posts_custom_column', $plugin_shortcodes, 'add_slide_columns_content', 10, 2 );
 
 	}
 
