@@ -122,4 +122,35 @@ class Monospace_Slides_Shortcodes {
 
 	}
 
+	/**
+	 * Creates a new admin column on the custom post type listing screen that will display the slide shortcode.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param array $columns    Screen columns.
+	 */
+	public function add_slide_columns( $columns ) {
+
+		$columns['shortcode'] = __( 'Shortcode', 'monospace-slides' );
+
+		return $columns;
+
+	}
+
+	/**
+	 * Displays the slide shortcode in an admin column called 'shortcode'.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @param string $column    Shortcode column name identifier.
+	 * @param int    $post_id   The id of the post.
+	 */
+	public function add_slide_columns_content( $column, $post_id ) {
+
+		if ( 'shortcode' === $column ) {
+			echo '[mnsp_slide id="' . esc_attr( $post_id ) . '"]';
+		}
+
+	}
+
 }
