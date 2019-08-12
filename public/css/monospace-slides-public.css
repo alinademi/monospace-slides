@@ -3,3 +3,107 @@
  * included in this file.
  */
  
+.mnsp-slide {
+	position: relative;
+	padding: 0 !important;
+}
+
+.mnsp-slide {
+	display: flex;
+	height: auto;
+	justify-content: center;
+	align-items: center;
+	font-size: 1rem;
+	overflow: hidden;
+}
+
+.mnsp-slide::before { /* for the aspect ratio functionality */
+	content: "";
+	width: 1px;
+	margin-left: -1px;
+	float: left;
+	height: 0;
+}
+
+.mnsp-slide::after { /* to clear float */
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.mnsp-slide[data-mnsp-slide-horiz-align="left"] .mnsp-slide-caption {
+	text-align: left;
+}
+
+.mnsp-slide[data-mnsp-slide-horiz-align="center"] .mnsp-slide-caption {
+	text-align: center;
+}
+
+.mnsp-slide[data-mnsp-slide-horiz-align="right"] .mnsp-slide-caption {
+	text-align: right;
+}
+
+.mnsp-slide-caption {
+	position: relative;
+	width: 100%;
+    padding: 5vmin;
+	z-index: 2000;
+}
+
+.mnsp-slide-image {
+	max-width: 15%;
+}
+
+.mnsp-slide-title {
+	font-size: 1.25em;
+}
+
+.mnsp-slide-subtitle {
+	font-size: 1.1em;
+}
+
+.mnsp-slide .mnsp-slide-caption .mnsp-slide-cta,
+.mnsp-slide .mnsp-slide-caption .mnsp-slide-cta:hover,
+.mnsp-slide .mnsp-slide-caption .mnsp-slide-cta:focus,
+.mnsp-slide .mnsp-slide-caption .mnsp-slide-cta:active {
+	color: white;
+	text-decoration: none;
+	border: 0;
+	box-shadow: none;
+}
+
+.mnsp-slide .mnsp-slide-caption .mnsp-slide-cta {
+	display: inline-block;
+	font-family: Raleway, "Open Sans", "Source Sans Pro", sans-serif;
+	font-size: smaller;
+	font-weight: bold;
+	text-transform: uppercase;
+	line-height: 1;
+	padding: 16px 30px;
+	background-color: black;
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+
+.mnsp-slide-caption > * + * {
+	margin: 0.75rem 0 0 0;
+}
+
+.mnsp-slide-featured {
+	position: absolute;
+	height: 100%;
+	object-fit: cover;
+	z-index: 1000;
+}
+
+.mnsp-slide[data-mnsp-slide-ratio="wide"]::before {
+	padding-top: 56.25%;
+}
+
+.mnsp-slide[data-mnsp-slide-ratio="classic"]::before {
+	padding-top: 75%;
+}
+
+.mnsp-slide[data-mnsp-slide-ratio="square"]::before {
+	padding-top: 100%;
+}
