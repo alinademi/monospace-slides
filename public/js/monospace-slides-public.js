@@ -6,7 +6,8 @@
 	 * should reside in this file.
 	 */
 
-	var slides  = document.querySelectorAll( '.mnsp-slide' );
+	var slides  = document.querySelectorAll( '.mnsp-slide' ),
+		sliders = document.querySelectorAll( '.mnsp-slider' );
 
 	slides.forEach( function( slide ) {
 
@@ -47,6 +48,31 @@
 		if ( featured ) {
 			featured.style.opacity = $this.dataset.mnspSlideFeaturedOpacity;
 		}
+
+	} ); // eslint-disable-line
+
+	sliders.forEach( function( element ) {
+
+		var $this = element,
+			slider,
+			autoplay = $this.hasAttribute( 'data-mnsp-slider-autoplay' ),
+			pauseHover = $this.hasAttribute( 'data-mnsp-slider-pause-hover' ),
+			transitionDuration = $this.dataset.mnspSliderTransitionDuration || 1000,
+			timeout = 0;
+
+		if ( autoplay ) {
+			timeout = $this.dataset.mnspSliderTimeout;
+		}
+
+		slider = new Glide( $this, {
+			type: 'carousel',
+			autoplay: timeout,
+			hoverpause: pauseHover,
+			animationDuration: transitionDuration,
+			perView: 1
+		} ); // eslint-disable-line
+
+		slider.mount();
 
 	} ); // eslint-disable-line
 
